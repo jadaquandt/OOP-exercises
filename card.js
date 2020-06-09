@@ -58,4 +58,46 @@ console.log(myHand.getPoints())
 
 //DECK CONSTRUCTOR//
 // A deck is also represented as a collection of cards, but it would also be convenient for it to be able to shuffle itself, and be asked to draw a card. We would like to be able to do this with a Deck constructor:
+class Deck {
+    constructor() {
+//initializing empty array to fill with cards
+        this.cards = [];
+//Original array was not shuffled so I initialized a new one to use with drawing
+        this.shuffledDeck = [];
+//Declaring variables to populate array
+        let suits = ['clubs', 'diamonds', 'hearts', 'spades'];
+        let points = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+//For loops to add values to one array to equal 52 cards
+        for(var i = 0; i < suits.length; i++) {
+            for(var j = 0; j < points.length; j++) {
+              var card = {point: points[j], suit: suits[i]};
+              this.cards.push(card);
+            }
+          }
+        }
+    shuffle() {
+        this.shuffledDeck = this.cards.sort(() => Math.random() - 0.5);
+        // console.log(this.shuffledDeck)
+    }
+    draw() {
+        //Using shift() method to grab the first card of the array
+        let newCard = this.shuffledDeck.shift();
+        console.log(newCard);
+        // console.log(this.shuffledDeck)
+    }
+    numCardsLeft() {
+        //Print out how many cards are left in the array after drawing
+        console.log(this.shuffledDeck.length);
+    }
+}
+var myDeck = new Deck()
+//Prints out total number of cards
+console.log(myDeck.cards.length)
+//shuffles again
+myDeck.shuffle()
+//Draws
+myDeck.draw()
+myDeck.draw()
+//Prints out total number of cards left = 50
+myDeck.numCardsLeft()
 
